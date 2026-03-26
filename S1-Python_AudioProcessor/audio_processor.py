@@ -39,7 +39,25 @@ output_data = np.zeros(len(input_data))
 # * PROCESSING COMES HERE *
 # *************************
 
-output_data = input_data
+# *** Echo ****************
+#
+#delay = 0.5         # Delay (s)
+#d = int(delay*fs)
+#feedback = .5
+#output_data = input_data
+#for i in range(d,len(input_data)):
+#    output_data[i] += feedback*output_data[i-d]
+# *************************
+
+# *** Vibrato *************
+# Low frequency oscillator
+f_low = 5       # frequency (Hz)
+a_low = 10      # freq shift amplitude 
+
+for n in range(len(input_data)):
+    output_data[n] = input_data[n - a_low*(1+np.sin(f_low*2*np.pi*n))/2] # /!\
+
+
 
 # *************************
 
